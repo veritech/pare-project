@@ -1,0 +1,4 @@
+2009-04-07 18:47:02 Notice: Notice (1024): Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application in [CORE/cake/libs/debugger.php, line 556]
+2009-04-07 20:03:59 Notice: Notice (8): Undefined variable: _GLOBALS in [APP/config/database.php, line 103]
+2009-04-07 20:04:06 Notice: Notice (8): Undefined variable: _GLOBAL in [APP/config/database.php, line 103]
+2009-04-07 20:04:13 Notice: Notice (8): Undefined variable: _GLOBALS in [APP/config/database.php, line 103]
