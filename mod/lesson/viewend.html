@@ -1,0 +1,18 @@
+<?php  // $Id: viewend.html,v 1.5 2006/12/30 17:29:45 mark-nielsen Exp $
+/**
+ * End of the HTML template for viewing pages
+ *
+ * @version $Id: viewend.html,v 1.5 2006/12/30 17:29:45 mark-nielsen Exp $
+ * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @package lesson
+ **/
+?>
+<!-- Start view end -->
+        </td>
+        <td>
+            <?php print_clock_block($cm->id, $lesson, $timer); ?>
+            <?php print_mediafile_block($cm->id, $lesson); // If there is one ?>
+        </td>
+    </tr>
+</table>
+<!-- End view end -->

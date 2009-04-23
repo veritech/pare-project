@@ -1,0 +1,40 @@
+<?php  //$Id: lib.php,v 1.7.2.3 2009/04/20 21:29:07 stronk7 Exp $
+
+function tex_sanitize_formula($texexp) {
+    /// Check $texexp against blacklist (whitelisting could be more complete but also harder to maintain)
+    $tex_blacklist = array(
+        'include','command','loop','repeat','open','toks','output',
+        'input','catcode','name','^^',
+        '\def','\edef','\gdef','\xdef',
+        '\every','\errhelp','\errorstopmode','\scrollmode','\nonstopmode',
+        '\batchmode','\read','\write','csname','\newhelp','\uppercase',
+        '\lowercase','\relax','\aftergroup',
+        '\afterassignment','\expandafter','\noexpand','\special',
+        '\let', '\futurelet','\else','\fi','\chardef','\makeatletter','\afterground',
+        '\noexpand','\line','\mathcode','\item','\section','\mbox','\declarerobustcommand'
+    );
+
+    return  str_ireplace($tex_blacklist, 'forbiddenkeyword', $texexp);
+}
+
+/**
+ * Purge all caches when settings changed.
+ */
+function filter_tex_updatedcallback($name) {
+    global $CFG;
+
+    if (file_exists("$CFG->dataroot/filter/tex")) {
+        remove_dir("$CFG->dataroot/filter/tex");
+    }
+    if (file_exists("$CFG->dataroot/filter/algebra")) {
+        remove_dir("$CFG->dataroot/filter/algebra");
+    }
+    if (file_exists("$CFG->dataroot/temp/latex")) {
+        remove_dir("$CFG->dataroot/temp/latex");
+    }
+
+    delete_records('cache_filters', 'filter', 'tex');
+    delete_records('cache_filters', 'filter', 'algebra');
+}
+
+?>

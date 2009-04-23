@@ -1,0 +1,90 @@
+<?php
+
+    global $CFG;
+
+    // Set to defaults if undefined
+    if (!isset($config->auth_instructions) or empty($config->user_attribute)) {
+        $config->auth_instructions = get_string('auth_shib_instructions', 'auth', $CFG->wwwroot.'/auth/shibboleth/index.php');
+    }
+    if (!isset ($config->user_attribute)) {
+        $config->user_attribute = '';
+    }
+    if (!isset ($config->convert_data)) {
+        $config->convert_data = '';
+    }
+    if (!isset($config->changepasswordurl)) {
+        $config->changepasswordurl = '';
+    }
+
+?>
+<table cellspacing="0" cellpadding="5" border="0">
+
+<tr valign="top" class="required">
+    <td align="right"><?php print_string("username") ?>:</td>
+    <td>
+        <input name="user_attribute" type="text" size="30" value="<?php echo $config->user_attribute ?>" />
+    </td>
+    <td><?php print_string("auth_shib_username_description", "auth") ?></td>
+</tr>
+
+<!-- 
+This is kind of obsolete because the login instructions are now centralized 
+On the other hand it would be great for Shibboleth to have seperate login 
+instructions
+-->
+<!--
+<tr valign="top">
+    <td align="right"><?php print_string("instructions", "auth") ?>:</td>
+    <td>
+        <textarea name="auth_instructions" cols="30" rows="10" wrap="virtual"><?php p($config->auth_instructions) ?></textarea>
+    </td>
+    <td>
+        <?php
+  
+        print_string("auth_shib_instructions_help", "auth", htmlspecialchars($CFG->wwwroot.'/auth/shibboleth/index.php'));
+        helpbutton("text", get_string("helptext"));
+
+        ?>
+    </td>
+</tr>
+-->
+
+<tr valign="top">
+    <td align="right"><?php print_string("auth_shib_convert_data", "auth") ?>:</td>
+    <td>
+        <input name="convert_data" type="text" size="30" value="<?php echo $config->convert_data?>" />
+        <?php
+
+        if ($config->convert_data and $config->convert_data != '' and !is_readable($config->convert_data)) {
+              echo '<br/><font color="red">';
+              print_string("auth_shib_convert_data_warning", "auth");
+              echo '</font>';
+        }
+
+        ?>
+    </td>
+    <td><?php print_string("auth_shib_convert_data_description", "auth") ?></td>
+</tr>
+
+
+<tr valign="top">
+    <td align="right"><?php print_string('auth_shib_changepasswordurl', 'auth') ?>: </td>
+    <td>
+        <input name="changepasswordurl" type="text" value="<?php echo $config->changepasswordurl ?>" />
+        <?php
+
+        if (isset($err['changepasswordurl'])) {
+            formerr($err['changepasswordurl']);
+        }
+
+        ?>
+    </td>
+    <td><?php print_string('changepasswordhelp', 'auth') ?></td>
+</tr>
+
+<?php
+
+print_auth_lock_options('shibboleth', $user_fields, '<!-- empty help -->', true, false);
+
+?>
+</table>
