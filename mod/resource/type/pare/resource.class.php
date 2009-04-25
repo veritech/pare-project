@@ -50,9 +50,10 @@ class resource_pare extends resource_base
 	function setup_elements(&$mform)
 	{
 		fb('setup_elements called');
+	    return 'test';
+		//$mform->addElement('htmleditor', 'alltext', get_string('fulltext', 'resource'), array('cols'=>85, 'rows'=>30));
+		$mform->addElement('checkbox', 'blockdisplay', get_string('showcourseblocks', 'resource'));
 	    
-		$mform->addElement('htmleditor', 'alltext', get_string('fulltext', 'resource'), array('cols'=>85, 'rows'=>30));
-		
 		fb($mform);
 	}
 
