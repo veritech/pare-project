@@ -51,7 +51,13 @@ class resource_pare extends resource_base
 	*/
 	function setup_elements(&$mform)
 	{
-		$bar = new UserModel();
+		$bar = new ResourceModel();
+		fb( $_GET );
+		fb( $mform );
+		fb( $_POST );
+		$mform->addElement('select', 1, 'Resource', array('select 1','select 2','select 3'));
+		//$mform->add_action_buttons();
+		
 		fb('setup_elements called');
 	    //return 'test';
 		//$mform->addElement('htmleditor', 'alltext', get_string('fulltext', 'resource'), array('cols'=>85, 'rows'=>30));
