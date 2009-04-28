@@ -1,6 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
 require_once('FirePHPCore/fb.php');
+require_once('class_list.php');
 
 class resource_pare extends resource_base
 {
@@ -49,10 +51,11 @@ class resource_pare extends resource_base
 	*/
 	function setup_elements(&$mform)
 	{
+		$bar = new UserModel();
 		fb('setup_elements called');
-	    return 'test';
+	    //return 'test';
 		//$mform->addElement('htmleditor', 'alltext', get_string('fulltext', 'resource'), array('cols'=>85, 'rows'=>30));
-		$mform->addElement('checkbox', 'blockdisplay', get_string('showcourseblocks', 'resource'));
+		//$mform->addElement('checkbox', 'blockdisplay', get_string('showcourseblocks', 'resource'));
 	    
 		fb($mform);
 	}
